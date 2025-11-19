@@ -2,12 +2,11 @@
 import { db } from "./drizzle";
 import { products } from "./schema";
 import { embedMany } from "ai";
-import { azure } from "../ai/embedding"; // Use the centralized Azure instance
+import { azure } from "../ai/embedding"; 
 import fs from "fs";
 import path from "path";
 import * as dotenv from "dotenv";
 
-// Load environment variables
 dotenv.config({ path: ".env.local" });
 
 async function main() {
@@ -29,9 +28,6 @@ async function main() {
     content: `Product: ${product.title}\nBrand: ${product.brand}\nCategory: ${product.category}\nDescription: ${product.description}\nPrice: $${product.price}`,
   }));
 
-  // Generate embeddings efficiently using embedMany
-  // CRITICAL: We replace newlines with spaces to match the logic in our search query
-  // This ensures the vector space is consistent between seeding and searching.
   const { embeddings } = await embedMany({
     model: azure.textEmbeddingModel(process.env.OPENAI_API_EMBEDDING_MODEL!),
     values: productsToProcess.map((p: any) => p.content.replace(/\n/g, " ")),
@@ -39,7 +35,6 @@ async function main() {
 
   console.log(`✨ Generated ${embeddings.length} embeddings.`);
 
-  // Combine data with embeddings for insertion
   const rows = productsToProcess.map((product: any, i: number) => ({
     id: product.id,
     title: product.title,
@@ -48,11 +43,10 @@ async function main() {
     category: product.category,
     brand: product.brand,
     imageUrl: product.imageUrl,
-    content: product.content, // We store the original formatted content for the LLM context
+    content: product.content, 
     embedding: embeddings[i],
   }));
 
-  // Batch insert into the database
   await db.insert(products).values(rows).onConflictDoNothing();
 
   console.log("✅ Database seeded successfully!");

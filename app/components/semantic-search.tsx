@@ -1,10 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 
-// Define the interface for the product results
 interface ProductSearchResult {
   id: number;
   name: string;
@@ -20,12 +18,9 @@ export default function SemanticSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // We use a ref to track the latest query we searched for
   const lastSearchedQuery = useRef("");
 
-  // The actual search logic
   const performSearch = useCallback(async (searchQuery: string) => {
-    // Clear results if empty
     if (!searchQuery.trim()) {
       setResults([]);
       return;
@@ -64,12 +59,10 @@ export default function SemanticSearch() {
       setError(`Search failed: ${errorMessage}`);
     } finally {
       setLoading(false);
-      // Mark this query as "done"
       lastSearchedQuery.current = searchQuery;
     }
   }, []);
 
-  // 1. Live Search Effect (Debounced)
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -77,7 +70,6 @@ export default function SemanticSearch() {
     }
 
     const timer = setTimeout(() => {
-      // Only search if the query is different from the last successful search
       if (query !== lastSearchedQuery.current) {
         performSearch(query);
       }
@@ -86,7 +78,6 @@ export default function SemanticSearch() {
     return () => clearTimeout(timer);
   }, [query, performSearch]);
 
-  // 2. Manual Submit
   const handleManualSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     performSearch(query);
@@ -125,7 +116,6 @@ export default function SemanticSearch() {
       <div className="flex-1 overflow-y-auto space-y-4 pt-2">
         {error && <p className="text-red-500 font-medium">Error: {error}</p>}
 
-        {/* FIXED: Added check for lastSearchedQuery.current */}
         {!loading &&
           results.length === 0 &&
           !error &&

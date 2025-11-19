@@ -5,7 +5,6 @@ import SemanticSearch from "./components/semantic-search";
 import ChatUI from "./components/chat-ui";
 import MaterialMatcher from "./components/material-matcher";
 
-// Add "matcher" to the View type
 type View = "chat" | "search" | "matcher";
 
 export default function AppWrapper() {
@@ -47,7 +46,7 @@ export default function AppWrapper() {
       </div>
 
       {/* Conditional Content */}
-      <div className="flex flex-col flex-grow overflow-hidden">
+      <div className="flex flex-col grow overflow-hidden">
         {view === "chat" && <ChatUI />}
         {view === "search" && <SemanticSearch />}
         {view === "matcher" && <MaterialMatcher />}

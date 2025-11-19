@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-// Define our result type based on the DB schema
 interface MaterialResult {
   id: number;
   ea_number: string;
@@ -49,7 +48,6 @@ export default function MaterialMatcher() {
 
       // 1. Check if the response is valid
       if (!res.ok) {
-        // Read the raw text to see the real error (e.g. 404 HTML or 500 stack trace)
         const errorText = await res.text();
         console.error("API Error:", res.status, errorText);
         alert(`Error ${res.status}: ${errorText.slice(0, 100)}`); // Alert the user

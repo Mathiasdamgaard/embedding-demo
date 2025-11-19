@@ -1,6 +1,6 @@
 import { db } from "@/lib/db/drizzle";
 import { materials } from "@/lib/db/schema";
-import { cosineDistance, desc, gt, sql } from "drizzle-orm";
+import { cosineDistance, desc, sql } from "drizzle-orm";
 import { embed } from "ai";
 import { azure } from "@/lib/ai/embedding";
 import fs from "fs";
@@ -25,8 +25,6 @@ async function main() {
     console.log(`   Desc:  "${unknown.description}"`);
 
     // 1. Simulate the Agent Logic: Create a search string
-    // In a real app, an LLM might clean this string first.
-    // For now, we just search with what we have.
     const query = `Material: ${unknown.input_name}\nDescription: ${unknown.description}`;
 
     // 2. Generate Embedding for the "Unknown" item

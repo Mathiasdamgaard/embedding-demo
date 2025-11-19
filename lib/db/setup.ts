@@ -4,7 +4,6 @@ import { db } from "./drizzle";
 async function main() {
   console.log("🔌 Enabling pgvector extension...");
   
-  // This SQL command turns on the vector math capabilities
   await db.execute(sql`CREATE EXTENSION IF NOT EXISTS vector;`);
   
   console.log("✅ Vector extension enabled!");

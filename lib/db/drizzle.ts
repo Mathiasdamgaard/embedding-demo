@@ -2,7 +2,6 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import * as dotenv from "dotenv";
 
-// Ensure we load the environment variables
 dotenv.config({ path: ".env.local" });
 
 if (!process.env.DATABASE_URL) {

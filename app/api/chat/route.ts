@@ -6,10 +6,8 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
-  // Get the last user message text
   const lastMessage = messages[messages.length - 1];
 
-  // Robustly extract text from the strict UIMessage structure
   const userQuery = lastMessage.parts
     .filter((part) => part.type === "text")
     .map((part) => part.text)
