@@ -3,24 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx lib/db/seed.ts && tsx lib/db/seed-materials.ts",
+    "db:setup": "drizzle-kit push && tsx lib/db/seed.ts && tsx lib/db/seed-materials.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "next": "16.0.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "@ai-sdk/azure": "^2.0.70",
+    "@ai-sdk/openai": "^2.0.68",
+    "@ai-sdk/react": "^2.0.93",
+    "ai": "^5.0.93",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "next": "^16.0.3",
+    "pg": "^8.16.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^9.1.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^20",
+    "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.28.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

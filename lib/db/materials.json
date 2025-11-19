@@ -1,0 +1,134 @@
+{
+  "database_materials": [
+    {
+      "id": 1001,
+      "ea_number": "1010001111",
+      "name": "NOIKX FLEX 5G6 90°",
+      "description": "Fleksibelt installationskabel 90 grader, 5 leder 6mm2 med jord. Halogenfri.",
+      "category": "cables",
+      "specs": {
+        "type": "NOIKX",
+        "conductors": 5,
+        "cross_section": 6,
+        "flex": true,
+        "ground": true
+      },
+      "time_estimation": 12.5,
+      "price": 45.0
+    },
+    {
+      "id": 1002,
+      "ea_number": "1010001112",
+      "name": "NOIKX 3G1.5 90°",
+      "description": "Standard installationskabel 90 grader, 3 leder 1.5mm2 med jord.",
+      "category": "cables",
+      "specs": {
+        "type": "NOIKX",
+        "conductors": 3,
+        "cross_section": 1.5,
+        "flex": false,
+        "ground": true
+      },
+      "time_estimation": 8.0,
+      "price": 15.5
+    },
+    {
+      "id": 1003,
+      "ea_number": "1010001113",
+      "name": "PVIKJ 5G10",
+      "description": "PVC-isoleret kappekabel, 5 leder 10mm2. Egnet til fast installation.",
+      "category": "cables",
+      "specs": {
+        "type": "PVIKJ",
+        "conductors": 5,
+        "cross_section": 10,
+        "flex": false,
+        "ground": true
+      },
+      "time_estimation": 18.0,
+      "price": 85.0
+    },
+    {
+      "id": 1004,
+      "ea_number": "1010001114",
+      "name": "FXQJ 4X240/72",
+      "description": "Kraftkabel med kobberskærm, 4 leder 240mm2. Halogenfri og brandhæmmende.",
+      "category": "heavy_cables",
+      "specs": {
+        "type": "FXQJ",
+        "conductors": 4,
+        "cross_section": 240,
+        "flex": false,
+        "ground": false
+      },
+      "time_estimation": 45.0,
+      "price": 450.0
+    },
+    {
+      "id": 1005,
+      "ea_number": "1010001115",
+      "name": "NOIKX FLEX 3G2.5",
+      "description": "Let fleksibelt kabel til installation, 3 leder 2.5mm2.",
+      "category": "cables",
+      "specs": {
+        "type": "NOIKX",
+        "conductors": 3,
+        "cross_section": 2.5,
+        "flex": true,
+        "ground": true
+      },
+      "time_estimation": 9.5,
+      "price": 22.0
+    },
+    {
+      "id": 1006,
+      "ea_number": "1010001116",
+      "name": "EXQJ 4X10/10",
+      "description": "Installationskabel PEX-isoleret, 4 leder 10mm2 med koncentrisk skærm.",
+      "category": "cables",
+      "specs": {
+        "type": "EXQJ",
+        "conductors": 4,
+        "cross_section": 10,
+        "flex": false,
+        "ground": false
+      },
+      "time_estimation": 16.0,
+      "price": 65.0
+    }
+  ],
+  "unknown_materials": [
+    {
+      "test_id": "TEST_001",
+      "input_name": "NOIKX-FLEX 5G6",
+      "description": "Restparti kabel 5x6mm flex. Mangler EA nummer.",
+      "missing_props": ["ea_number", "time_estimation"],
+      "expected_match_id": 1001,
+      "notes": "Should match id 1001 despite missing '90°' and dash in name."
+    },
+    {
+      "test_id": "TEST_002",
+      "input_name": "Cable PVIKJ 5x10mm2",
+      "description": "Standard PVC cable found on site.",
+      "missing_props": ["time_estimation"],
+      "expected_match_id": 1003,
+      "notes": "Uses '5x10mm2' notation instead of '5G10'. Semantic search should catch this."
+    },
+    {
+      "test_id": "TEST_003",
+      "input_name": "NOIKX 3G 1,5",
+      "description": "Almindeligt installationskabel.",
+      "missing_props": ["time_estimation", "specs"],
+      "expected_match_id": 1002,
+      "notes": "Uses comma '1,5' instead of dot '1.5' and extra spaces. Very common typo."
+    },
+    {
+      "test_id": "TEST_004",
+      "input_name": "Heavy Duty 240mm Power Cable",
+      "description": "Stort sort forsyningskabel, ligner FXQJ typen.",
+      "missing_props": ["name", "ea_number", "time_estimation"],
+      "expected_match_id": 1004,
+      "notes": "Totally missing the code name, relies purely on description 'Heavy Duty 240mm' + 'FXQJ type'."
+    }
+  ]
+}
